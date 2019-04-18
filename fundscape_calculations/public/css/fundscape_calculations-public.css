@@ -1,0 +1,28 @@
+/**
+ * All of the CSS for your public-facing functionality should be
+ * included in this file.
+ */
+
+ /* Form Styling */
+.fundscape-fields-section {
+	padding: 0 0 15px;
+}
+.fundscape-fields-section label {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 18px;
+    padding: 0 10px 0 0;
+}
+.fundscape-fields-section .fundscape-field {
+    height: 30px;
+    font-size: 16px;
+    line-height: 20px;
+    padding: 5px 15px;
+}
+.fundscape-fields-section .fundscape-btn {
+	padding: 10px 20px;
+}
+#show-form-result {
+	display: none;
+	padding: 10px 0;
+}
