@@ -1,2 +1,2 @@
-# TestCalculator
-This is Test Calculator. 
+# FundsCalculator
+This is Funds Calculator. 
