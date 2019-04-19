@@ -81,6 +81,18 @@ function run_fundscape_calculations() {
 }
 run_fundscape_calculations();
 
+/**
+ *  Add Plugin Setting
+ *
+ */
+function platform_settings ( $links ) {
+	$mylinks = array(
+ 		'<a href="' . admin_url( 'edit.php?post_type=platform&page=platform_options' ) . '">Settings</a>',
+ 	);
+	return array_merge( $links, $mylinks );
+}
+add_filter( 'plugin_action_links_' . plugin_basename(__FILE__), 'platform_settings' );
+
 
 /**
  * Inlcude Custom Post Type Platform
@@ -108,3 +120,25 @@ require_once plugin_dir_path( __FILE__ ) . 'admin/platform_option.php';
  *
  */
 require_once plugin_dir_path( __FILE__ ) . 'public/platform_form_display.php';
+
+
+/**
+ *  Set Admin notice if platform is not available.
+ *
+ */
+function platform_availibility_notice() {
+
+	/* Notice if there is no platforms available. */
+	$all_platforms = get_posts( array( 'post_type' => 'platform', 'numberposts' => 1, 'post_status' => 'publish' ) );
+	if ( empty( $all_platforms ) ) {
+		echo '<div class="notice notice-warning is-dismissible"><p>You don\'t have any active platform. Please Add a platform and make it active.</p></div>';
+	}
+
+	/* Notice if Platform is not selected as active. */
+	$active_platform = stripslashes( get_option( 'active_platform' ) );
+	if ( empty( $active_platform ) || $active_platform == 'none' ) {
+		echo '<div class="notice notice-warning is-dismissible"><p>Please select a platform as active.</p></div>';
+	}
+
+}
+add_action( 'admin_notices', 'platform_availibility_notice', 99 );

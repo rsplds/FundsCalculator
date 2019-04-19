@@ -40,7 +40,7 @@ function platform_options_function() {
 
 			<table class="wp-list-table widefat fixed striped posts">
 				<tr>
-					<th>Select Platform</th>
+					<th>Select Active Platform</th>
 				</tr>
 				<tr>
 					<td>
@@ -62,14 +62,35 @@ function platform_options_function() {
 						</div>
 					</td>
 				</tr>
-			</table>
-			</table>
-			<table class="wp-list-table widefat fixed striped posts">
 				<tr>
-					<td colspan="9"><input type="submit" id="sevf_submit" value="Save" class="button button-primary button-large"></td>
+					<td><input type="submit" id="sevf_submit" value="Save" class="button button-primary button-large"></td>
 				</tr>
 			</table>
 		</form>
+
+		<table class="wp-list-table widefat fixed striped posts">
+			<tr>
+				<th>
+					About Fundscape Calculation
+				</th>
+			</tr>
+			<tr>
+				<td>
+					<h3>Basic Info</h3>
+					<hr>
+					<p>This plugin is used to calculate GIA & ISA charges based on your investments. </p>
+					<p>&nbsp;</p>
+					<h3>How to use?</h3>
+					<hr>
+					<h4>For Admin:</h4>
+					<p>As a Admin, First you have to create a platform with necessary values.</p>
+					<p>After creating a platform, visit platform settings page and save it as a active platform to make calculations.</p>
+					<h4>To display form on Front-end:</h4>
+					<p>To display form on Front-end, you use our shortcode <span class="highlight">[fundscape_form]</span> in any of the page or post content editor. or You can use php function <span class="highlight">&lt;?php echo do_shortcode( '[fundscape_form]' ); ?&gt;</span> in the PHP file direct.</p>
+					<p>You can also use our plugin created page <a href="<?php echo esc_url( home_url( '/fundscape-calculations' ) ); ?>" target="_blank">Fundscape Calculations</a></p>
+				</td>
+			</tr>
+		</table>
 	</div>
 
 <?php } ?>

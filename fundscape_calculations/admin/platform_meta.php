@@ -41,11 +41,14 @@ function platform_meta_fields() {
 							<label>Select Method</label>
 							<select name="platform_method" id="platform_method">
 								<?php
+									$tiering_selected = '';
 									foreach ( $tiering_methods as $key => $value ) {
-										if ( $key == $platform_data[0]->platform_method ) {
-											$tiering_selected = 'selected';
-										} else {
-											$tiering_selected = '';
+										if ( !empty( $platform_data ) ) {
+											if ( $key == $platform_data[0]->platform_method ) {
+												$tiering_selected = 'selected';
+											} else {
+												$tiering_selected = '';
+											}
 										}
 										echo '<option value="' . $key . '" ' . $tiering_selected . '>' . $value . '</option>';
 									}

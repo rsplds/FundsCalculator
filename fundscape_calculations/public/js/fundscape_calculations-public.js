@@ -48,20 +48,14 @@
 
 						let result_data;
 
-						if ( response.success == true ) {
-
-							result_data = '<div class="success">';
-							result_data += '<div class="result-inner"> Total investment : £' + response.result.total_investment + '<div>';
-							result_data += '<div class="result-inner">Total Charges : £' + response.result.total_charges + '</div>';
-							result_data += '<div class="result-inner"> GIA Fund Charges : £' + response.result.gia_fund_charge + '</div>';
-							result_data += '<div class="result-inner"> GIA Exchange Trade Charges : £' + response.result.gia_charges_et + '</div>';
-							result_data += '<div class="result-inner"> ISA Fund Charges : £' + response.result.isa_charges_fund + '</div>';
-							result_data += '<div class="result-inner"> ISA Exchange Charges : £' + response.result.isa_charges_et + '</div>';
-							result_data += '</div>';
-
-						} else {
-							result_data = '<div class="fail">' + response.result + '</div>';
-						}
+						result_data = '<div class="success">';
+						result_data += '<div class="result-inner"> Total investment : £' + response.result.total_investment + '<div>';
+						result_data += '<div class="result-inner">Total Charges : £' + response.result.total_charges + '</div>';
+						result_data += '<div class="result-inner"> GIA Fund Charges : £' + response.result.gia_fund_charge + '</div>';
+						result_data += '<div class="result-inner"> GIA Exchange Trade Charges : £' + response.result.gia_charges_et + '</div>';
+						result_data += '<div class="result-inner"> ISA Fund Charges : £' + response.result.isa_charges_fund + '</div>';
+						result_data += '<div class="result-inner"> ISA Exchange Charges : £' + response.result.isa_charges_et + '</div>';
+						result_data += '</div>';
 
 						$( '#show-form-result' ).html( result_data );
 						$( '#show-form-result' ).show();

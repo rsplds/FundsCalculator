@@ -5,18 +5,26 @@
  */
 function fundscape_form_function() {
 
-	$fundscape_form = '<div class="fundscape-form-section">';
-	$fundscape_form .= '<form name="fundscape_form" id="fundscape-form" method="post">';
-	$fundscape_form .= '<h4>Product Split of total investment (Fund) :</h4>';
-	$fundscape_form .= '<div class="fundscape-fields-section"><label>GIA</label><input type="number" name="funds_gia" id="funds_gia" class="fundscape-field" min="0" /></div>';
-	$fundscape_form .= '<div class="fundscape-fields-section"><label>ISA</label><input type="number" name="funds_isa" id="funds_isa" class="fundscape-field" min="0" /></div>';
-	$fundscape_form .= '<h4>Product split of exchange-traded</h4>';
-	$fundscape_form .= '<div class="fundscape-fields-section"><label>GIA</label><input type="number" name="exchange_trade_gia" id="exchange_trade_gia" class="fundscape-field" min="0" /></div>';
-	$fundscape_form .= '<div class="fundscape-fields-section"><label>ISA</label><input type="number" name="exchange_trade_isa" id="exchange_trade_isa" class="fundscape-field" min="0" /></div>';
-	$fundscape_form .= '<div class="fundscape-fields-section"><input type="button" class="fundscape-btn" id="fundscape-submit" value="Calculate"></div>';
-	$fundscape_form .= '</form>';
-	$fundscape_form .= '<div id="show-form-result"></div>';
-	$fundscape_form .= '</div>';
+	if ( is_user_logged_in() ) {
+
+		$fundscape_form = '<div class="fundscape-form-section">';
+		$fundscape_form .= '<form name="fundscape_form" id="fundscape-form" method="post">';
+		$fundscape_form .= '<h4>Product Split of total investment (Fund) :</h4>';
+		$fundscape_form .= '<div class="fundscape-fields-section"><label>GIA</label><input type="number" name="funds_gia" id="funds_gia" class="fundscape-field" min="0" /></div>';
+		$fundscape_form .= '<div class="fundscape-fields-section"><label>ISA</label><input type="number" name="funds_isa" id="funds_isa" class="fundscape-field" min="0" /></div>';
+		$fundscape_form .= '<h4>Product split of exchange-traded</h4>';
+		$fundscape_form .= '<div class="fundscape-fields-section"><label>GIA</label><input type="number" name="exchange_trade_gia" id="exchange_trade_gia" class="fundscape-field" min="0" /></div>';
+		$fundscape_form .= '<div class="fundscape-fields-section"><label>ISA</label><input type="number" name="exchange_trade_isa" id="exchange_trade_isa" class="fundscape-field" min="0" /></div>';
+		$fundscape_form .= '<div class="fundscape-fields-section"><input type="button" class="fundscape-btn" id="fundscape-submit" value="Calculate"></div>';
+		$fundscape_form .= '</form>';
+		$fundscape_form .= '<div id="show-form-result"></div>';
+		$fundscape_form .= '</div>';
+
+	} else {
+
+		$fundscape_form = 'You are not authorised to view this page. <br />Please Login to access this page.';
+
+	}
 
 	return $fundscape_form;
 
@@ -37,7 +45,8 @@ function calculate_fund() {
 					"gia_charges_et" => 0.00,
 					"isa_charges_fund" => 0.00,
 					"isa_charges_et" => 0.00,
-					"total_charges" => 0.00
+					"total_charges" => 0.00,
+					"total_investment" => 0.00
 				);
 
 	$platform=array();
@@ -59,7 +68,6 @@ function calculate_fund() {
 
 	if ( !empty( $gia_fund ) || !empty( $isa_fund ) ) {
 
-		$platform_info = 'There is some problem in calculation. Please try again';
 		$active_platform = stripslashes( get_option( 'active_platform' ) );
 
 		if ( !empty( $active_platform ) && $active_platform !== 'none' ) {
@@ -399,8 +407,16 @@ function getGIAFundChargesFromTier( $fund_amount, $platform ) {
 				$charge += getPercentageValue($temp_amount,$value['gia']);
 				break;
 			}
-			$charge += getPercentageValue($value['bandsto'],$value['gia']);
-			$temp_amount -= $value['bandsto'];
+			/*$charge += getPercentageValue($value['bandsto'],$value['gia']);
+			$temp_amount -= $value['bandsto'];*/
+			if ( $temp_amount >= $value['bandsto'] ) {
+				$charge += getPercentageValue( $value['bandsto'], $value['gia'] );
+				$temp_amount -= $value['bandsto'];
+			} else {
+				//echo $charge." general</br>";
+				$charge += getPercentageValue( $temp_amount, $value['gia'] );
+				break;
+			}
 		}
 	}
 
@@ -426,8 +442,16 @@ function getGIAETChargesFromTier( $et_amount, $platform ) {
 				$charge += getPercentageValue($temp_amount,$value['gia']);
 				break;
 			}
-			$charge += getPercentageValue($value['bandsto'],$value['gia']);
-			$temp_amount -= $value['bandsto'];
+			/*$charge += getPercentageValue($value['bandsto'],$value['gia']);
+			$temp_amount -= $value['bandsto'];*/
+			if ( $temp_amount >= $value['bandsto'] ) {
+				$charge += getPercentageValue( $value['bandsto'], $value['gia'] );
+				$temp_amount -= $value['bandsto'];
+			} else {
+				//echo $charge." general</br>";
+				$charge += getPercentageValue( $temp_amount, $value['gia'] );
+				break;
+			}
 		}
 	}
 	//echo $charge;exit;
@@ -453,8 +477,16 @@ function getISAFundChargesFromTier( $fund_amount, $platform ) {
 				$charge += getPercentageValue($temp_amount,$value['isa']);
 				break;
 			}
-			$charge += getPercentageValue($value['bandsto'],$value['isa']);
-			$temp_amount -= $value['bandsto'];
+			/*$charge += getPercentageValue($value['bandsto'],$value['isa']);
+			$temp_amount -= $value['bandsto'];*/
+			if ( $temp_amount >= $value['bandsto'] ) {
+				$charge += getPercentageValue( $value['bandsto'], $value['isa'] );
+				$temp_amount -= $value['bandsto'];
+			} else {
+				//echo $charge." general</br>";
+				$charge += getPercentageValue( $temp_amount, $value['isa'] );
+				break;
+			}
 		}
 	}
 	//echo $charge."==";
@@ -480,8 +512,16 @@ function getISAETChargesFromTier( $et_amount, $platform ) {
 				$charge += getPercentageValue($temp_amount,$value['isa']);
 				break;
 			}
-			$charge += getPercentageValue($value['bandsto'],$value['isa']);
-			$temp_amount -= $value['bandsto'];
+			/*$charge += getPercentageValue($value['bandsto'],$value['isa']);
+			$temp_amount -= $value['bandsto'];*/
+			if ( $temp_amount >= $value['bandsto'] ) {
+				$charge += getPercentageValue( $value['bandsto'], $value['isa'] );
+				$temp_amount -= $value['bandsto'];
+			} else {
+				//echo $charge." general</br>";
+				$charge += getPercentageValue( $temp_amount, $value['isa'] );
+				break;
+			}
 		}
 	}
 	//echo $charge."==";
