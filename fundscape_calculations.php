@@ -13,7 +13,7 @@
  * @package           Fundscape_calculations
  *
  * @wordpress-plugin
- * Plugin Name:       Fundscape Calculations
+ * Plugin Name:       Funds Calculations
  * Plugin URI:        https://www.rishabhsoft.com/
  * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
  * Version:           1.0.0
@@ -142,3 +142,20 @@ function platform_availibility_notice() {
 
 }
 add_action( 'admin_notices', 'platform_availibility_notice', 99 );
+
+
+/**
+ *  Make Selected Platform Null if platform is deleted.
+ *
+ */
+function platform_trash_function($post_id) {
+
+	$active_platform = stripslashes( get_option( 'active_platform' ) );
+    if( !did_action('trash_post') ) {
+    	if ( $post_id == $active_platform ) {
+    		update_option( 'active_platform', 'none' );
+    	}
+    }
+
+}
+add_action('wp_trash_post','platform_trash_function',1,1);
