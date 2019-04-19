@@ -128,7 +128,7 @@ function platform_meta_fields() {
 						<?php endif; ?>
 					</div>
 					<div class="add-md-area clearfix">
-						<input type="hidden" id="funds_count" value="<?php echo $funds_count; ?>" />
+						<input type="hidden" id="funds_count" value="<?php echo $funds_count+1; ?>" />
 						<a href="javascript:" class="add-funds button-primary dashicons-before dashicons-plus"> Add</a>
 					</div>
 				</div>
@@ -201,7 +201,7 @@ function platform_meta_fields() {
 						<?php endif; ?>
 					</div>
 					<div class="add-md-area clearfix">
-						<input type="hidden" id="et_count" value="<?php echo $et_count; ?>" />
+						<input type="hidden" id="et_count" value="<?php echo $et_count+1; ?>" />
 						<a href="javascript:" class="add-exchange-trades button-primary dashicons-before dashicons-plus"> Add</a>
 					</div>
 				</div>
