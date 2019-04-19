@@ -31,6 +31,14 @@
 
 	$( document ).ready( function() {
 
+		/* Calculate Total Investment */
+		calculateSum();
+		$( ".fundscape-field" ).on( "keydown keyup", function() {
+			calculateSum();
+		} );
+
+
+		/* Fetch Calculation Results */
 		if( $( '#fundscape-submit' ).length > 0 ) {
 
 			$( '#fundscape-submit' ).on( 'click', function(e) {
@@ -61,12 +69,30 @@
 						$( '#show-form-result' ).show();
 
 					},
-		            complete : function() {}
+					complete : function() {}
 				} );
 			} );
 
 		}
 
 	} );
+
+
+	function calculateSum() {
+		var sum = 0;
+
+		$( ".fundscape-field" ).each( function() {
+
+			/* add only if the value is number */
+			if ( !isNaN(this.value) && this.value.length != 0 ) {
+				sum += parseFloat(this.value);
+				$(this).css( "background-color", "#FEFFB0" );
+			} else if ( this.value.length != 0 ) {
+				$(this).css( "background-color", "red" );
+			}
+		} );
+
+		$( "#total_investment" ).html( sum.toFixed(2) );
+	}
 
 })( jQuery );
