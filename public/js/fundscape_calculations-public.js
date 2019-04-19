@@ -56,15 +56,20 @@
 
 						let result_data;
 
-						result_data = '<div class="success">';
-						result_data += '<div class="result-inner"> Total investment : £' + response.result.total_investment + '<div>';
-						result_data += '<div class="result-inner">Total Charges : £' + response.result.total_charges + '</div>';
-						result_data += '<div class="result-inner"> GIA Fund Charges : £' + response.result.gia_fund_charge + '</div>';
-						result_data += '<div class="result-inner"> GIA Exchange Trade Charges : £' + response.result.gia_charges_et + '</div>';
-						result_data += '<div class="result-inner"> Total Gia Charges : £' + ( ( parseFloat(response.result.gia_charges_et))+ ( parseFloat(response.result.gia_fund_charge) ) ).toFixed(2) + '</div>';
-						result_data += '<div class="result-inner"> ISA Fund Charges : £' + response.result.isa_charges_fund + '</div>';
-						result_data += '<div class="result-inner"> ISA Exchange Charges : £' + response.result.isa_charges_et + '</div>';
-						result_data += '<div class="result-inner"> Total ISA Charges : £' + ( ( parseFloat(response.result.isa_charges_et))+ ( parseFloat(response.result.isa_charges_fund) ) ).toFixed(2) + '</div>';
+						result_data = '<div class="funds-results">';
+						result_data += '<div class="result-inner result-total"> <span>Total investment</span> : <span>£ ' + response.result.total_investment + '</span></div>';
+						result_data += '<div class="result-outer clearfix"><div class="result-left">';
+						result_data += '<div class="result-inner result-title"> GIA </div>';
+						result_data += '<div class="result-inner"> GIA Fund Charges : <span>£ ' + response.result.gia_fund_charge + '</span></div>';
+						result_data += '<div class="result-inner"> GIA Exchange Trade Charges : <span>£ ' + response.result.gia_charges_et + '</span></div>';
+						result_data += '<div class="result-inner"> Total Gia Charges : <span>£ ' + ( ( parseFloat(response.result.gia_charges_et))+ ( parseFloat(response.result.gia_fund_charge) ) ).toFixed(4) + '</span></div>';
+						result_data += '</div><div class="result-right">';
+						result_data += '<div class="result-inner result-title"> ISA </div>';
+						result_data += '<div class="result-inner"> ISA Fund Charges : <span>£ ' + response.result.isa_charges_fund + '</span></div>';
+						result_data += '<div class="result-inner"> ISA Exchange Charges : <span>£ ' + response.result.isa_charges_et + '</span></div>';
+						result_data += '<div class="result-inner"> Total ISA Charges : <span>£ ' + ( ( parseFloat(response.result.isa_charges_et))+ ( parseFloat(response.result.isa_charges_fund) ) ).toFixed(4) + '</span></div>';
+						result_data += '</div></div>';
+						result_data += '<div class="result-inner result-total"><span>Total Charges</span> : <span>£ ' + response.result.total_charges + '</span></div>';
 						result_data += '</div>';
 
 						$( '#show-form-result' ).html( result_data );
