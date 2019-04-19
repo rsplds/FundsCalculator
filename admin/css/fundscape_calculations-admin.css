@@ -1,0 +1,74 @@
+/**
+ * All of the CSS for your admin-specific functionality should be
+ * included in this file.
+ */
+
+/* Platform Meta CSS */
+.platform-table {
+	width: 100%;
+	text-align: left;
+}
+.platform-table .platform-title {
+ 	font-size: 14px;
+ 	font-weight: bold;
+ 	border-bottom: 1px solid #ccc;
+ 	padding: 0 0 10px;
+}
+.platform-table label {
+	display: inline-block;
+	padding: 0 0 3px;
+}
+.platform-table .dashicons-before:before {
+	vertical-align: middle;
+}
+.platform-table .platform-section {
+	padding: 10px;
+	margin: 0 0 30px;
+}
+.platform-table .platform-fields-container {
+	display: flex;
+	padding: 0 0 10px;
+	margin: 0 0 15px;
+}
+.platform-table .platform-fields-container .platform-fields-section { width: 20%; }
+
+/* Style for Plarform Options */
+.platform-admin { width: 90%; }
+.platform-admin .wp-list-table {
+	margin: 20px 0;
+	width: 100%;
+}
+.platform-admin .wp-list-table #active_platform {
+	min-width: 200px;
+	font-size: 14px;
+}
+.platform-admin .wp-list-table th {
+	font-size: 20px;
+	font-weight: 700;
+	line-height: 30px;
+}
+.platform-admin .wp-list-table label {
+	font-size: 15px;
+	font-weight: 700;
+	line-height: 20px;
+	padding: 0 0 10px;
+	display: block;
+}
+.platform-admin h3 {
+    font-size: 18px;
+}
+.platform-admin h4 {
+    color: #000;
+    font-size: 16px;
+}
+.platform-admin .widefat td p {
+    font-size: 14px;
+    line-height: 20px;
+    color: #4e4e4e;
+}
+.platform-admin .widefat td span.highlight {
+    background-color: #4da2c3;
+    color: #fff;
+    display: inline-block;
+    padding: 0 10px;
+}
