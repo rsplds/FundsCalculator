@@ -61,8 +61,10 @@
 						result_data += '<div class="result-inner">Total Charges : £' + response.result.total_charges + '</div>';
 						result_data += '<div class="result-inner"> GIA Fund Charges : £' + response.result.gia_fund_charge + '</div>';
 						result_data += '<div class="result-inner"> GIA Exchange Trade Charges : £' + response.result.gia_charges_et + '</div>';
+						result_data += '<div class="result-inner"> Total Gia Charges : £' + ( ( parseFloat(response.result.gia_charges_et))+ ( parseFloat(response.result.gia_fund_charge) ) ).toFixed(2) + '</div>';
 						result_data += '<div class="result-inner"> ISA Fund Charges : £' + response.result.isa_charges_fund + '</div>';
 						result_data += '<div class="result-inner"> ISA Exchange Charges : £' + response.result.isa_charges_et + '</div>';
+						result_data += '<div class="result-inner"> Total ISA Charges : £' + ( ( parseFloat(response.result.isa_charges_et))+ ( parseFloat(response.result.isa_charges_fund) ) ).toFixed(2) + '</div>';
 						result_data += '</div>';
 
 						$( '#show-form-result' ).html( result_data );

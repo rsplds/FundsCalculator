@@ -133,7 +133,7 @@ add_action('wp_ajax_nopriv_calculate_fund', 'calculate_fund');
  */
 function tiering_method_first( $gia_fund, $gia_et, $isa_fund, $isa_et, $total_investment, $platform ) {
 
-	$rate_charges=0.00; // percentage rate of charges
+	$rate_charges = 0.00; /* percentage rate of charges */
 
 	foreach ($platform['fund'] as $key => $value) {
 		if( ($value['bandsfrom'] <= $total_investment) && ($value['bandsto'] >= $total_investment) ){
@@ -142,38 +142,34 @@ function tiering_method_first( $gia_fund, $gia_et, $isa_fund, $isa_et, $total_in
 		}
 	}
 
-
-	// Calculation of gia and isa charges based on percentage rate
+	/*Calculation of gia and isa charges based on percentage rate*/
 	$gia_charges_fund = 0;
-	$gia_charges_et = 0;
-
+	$gia_charges_et   = 0;
 	$isa_charges_fund = 0;
-	$isa_charges_et = 0;
+	$isa_charges_et   = 0;
 
-	$gia_charges_fund = getPercentageValue($gia_fund,$rate_charges);
-	$gia_charges_fund = number_format((float)$gia_charges_fund, 2, '.', '');
+	$gia_charges_fund = getPercentageValue( $gia_fund, $rate_charges );
+	$gia_charges_fund = number_format( (float)$gia_charges_fund, 2, '.', '' );
+	$gia_charges_et   = getPercentageValue( $gia_et, $rate_charges );
+	$gia_charges_et   = number_format( (float)$gia_charges_et, 2, '.', '' );
 
-	$gia_charges_et = getPercentageValue($gia_et,$rate_charges);
-	$gia_charges_et = number_format((float)$gia_charges_et, 2, '.', '');
+	$isa_charges_fund = getPercentageValue( $isa_fund, $rate_charges );
+	$isa_charges_fund = number_format( (float)$isa_charges_fund, 2, '.', '' );
+	$isa_charges_et   = getPercentageValue( $isa_et, $rate_charges );
+	$isa_charges_et   = number_format( (float)$isa_charges_et, 2, '.', '' );
 
-	$isa_charges_fund = getPercentageValue($isa_fund,$rate_charges);
-	$isa_charges_fund = number_format((float)$isa_charges_fund, 2, '.', '');
+	$total_charges = $gia_charges_fund + $gia_charges_et + $isa_charges_fund + $isa_charges_et;
+	$total_charges = number_format( (float)$total_charges, 2, '.', '' );
 
-	$isa_charges_et = getPercentageValue($isa_et,$rate_charges);
-	$isa_charges_et = number_format((float)$isa_charges_et, 2, '.', '');
+	$result = array(
+					"gia_fund_charge" => $gia_charges_fund,
+					"gia_charges_et" => $gia_charges_et,
+					"isa_charges_fund" => $isa_charges_fund,
+					"isa_charges_et" => $isa_charges_et,
+					"total_charges" => $total_charges,
+					"total_investment" => $total_investment
+				);
 
-
-	$total_charges = $gia_charges_fund+$gia_charges_et+$isa_charges_fund+$isa_charges_et;
-	$total_charges = number_format((float)$total_charges, 2, '.', '');
-
-	$result = array(	"gia_fund_charge" => $gia_charges_fund,
-			"gia_charges_et" => $gia_charges_et,
-			"isa_charges_fund" => $isa_charges_fund,
-			"isa_charges_et" => $isa_charges_et,
-			"total_charges" => $total_charges,
-			"total_investment" => $total_investment
-		);
-	//print '<pre>';print_r($result);
 	return  $result;
 
 }
@@ -185,32 +181,30 @@ function tiering_method_first( $gia_fund, $gia_et, $isa_fund, $isa_et, $total_in
  */
 function tiering_method_secound( $gia_fund, $gia_et, $isa_fund, $isa_et, $total_investment, $platform ) {
 
-	$rate_charges=0.00; // percentage rate of charges
+	$rate_charges = 0.00; /* percentage rate of charges */
 
 	$gia_charges_fund = 0;
-	$gia_charges_et = 0;
-
+	$gia_charges_et   = 0;
 	$isa_charges_fund = 0;
-	$isa_charges_et = 0;
+	$isa_charges_et   = 0;
 
+	$gia_charges_fund =  getGIAFundChargesFromTier( $gia_fund, $platform );
+	$gia_charges_et   =  getGIAETChargesFromTier( $gia_et, $platform );
+	$isa_charges_fund =  getISAFundChargesFromTier( $isa_fund, $platform );
+	$isa_charges_et   =  getISAETChargesFromTier( $isa_et, $platform );
 
-	$gia_charges_fund =  getGIAFundChargesFromTier($gia_fund,$platform);
-	$gia_charges_et   =  getGIAETChargesFromTier($gia_et,$platform);
-	$isa_charges_fund =  getISAFundChargesFromTier($isa_fund,$platform);
-	$isa_charges_et   =  getISAETChargesFromTier($isa_et,$platform);
+	$total_charges = $gia_charges_fund + $gia_charges_et + $isa_charges_fund + $isa_charges_et;
+	$total_charges = number_format( (float)$total_charges, 2, '.', '' );
 
-	$total_charges = $gia_charges_fund+$gia_charges_et+$isa_charges_fund+$isa_charges_et;
-	$total_charges = number_format((float)$total_charges, 2, '.', '');
+	$result = array(
+					"gia_fund_charge" => $gia_charges_fund,
+					"gia_charges_et" => $gia_charges_et,
+					"isa_charges_fund" => $isa_charges_fund,
+					"isa_charges_et" => $isa_charges_et,
+					"total_charges" => $total_charges,
+					"total_investment" => $total_investment
+				);
 
-
-	$result = array(	"gia_fund_charge" => $gia_charges_fund,
-			"gia_charges_et" => $gia_charges_et,
-			"isa_charges_fund" => $isa_charges_fund,
-			"isa_charges_et" => $isa_charges_et,
-			"total_charges" => $total_charges,
-			"total_investment" => $total_investment
-		);
-	//print '<pre>';print_r($result);
 	return  $result;
 
 }
@@ -221,50 +215,42 @@ function tiering_method_secound( $gia_fund, $gia_et, $isa_fund, $isa_et, $total_
  */
 function tiering_method_third( $gia_fund, $gia_et, $isa_fund, $isa_et, $total_investment, $platform ) {
 
-	$rate_charges=0.00; // percentage rate of charges
+	$rate_charges = 0.00; /* percentage rate of charges */
 
 	$gia_charges_fund = 0;
-	$gia_charges_et = 0;
-
+	$gia_charges_et   = 0;
 	$isa_charges_fund = 0;
-	$isa_charges_et = 0;
+	$isa_charges_et   = 0;
 
-		//echo $gia_fund."==".$gia_et;exit;
-		$gia_overall_investment=$gia_fund+$gia_et;
-	$gia_charges_fund =  getGIAFundChargesFromTier($gia_overall_investment,$platform);
+	$gia_overall_investment = $gia_fund + $gia_et;
+	$gia_charges_fund = getGIAFundChargesFromTier( $gia_overall_investment, $platform );
+	$gia_overall_charge = ($gia_overall_investment != 0) ? ($gia_charges_fund/$gia_overall_investment)*100 : 0.00;
 
-	$gia_overall_charge=($gia_overall_investment != 0)?($gia_charges_fund/$gia_overall_investment)*100:0.00;
+	$isa_overall_investment = $isa_fund + $isa_et;
+	$isa_charges_fund = getISAFundChargesFromTier( $isa_overall_investment, $platform );
+	$isa_overall_charge = ($isa_overall_investment != 0) ? ($isa_charges_fund/$isa_overall_investment)*100 : 0.00;
 
-	//$gia_charges_et   =  getGIAETChargesFromTier($gia_et,$platform);
-	$isa_overall_investment = $isa_fund+$isa_et;
-	$isa_charges_fund =  getISAFundChargesFromTier($isa_overall_investment,$platform);
-
-	$isa_overall_charge=($isa_overall_investment != 0)?($isa_charges_fund/$isa_overall_investment)*100:0.00;
-	//$isa_charges_et   =  getISAETChargesFromTier($isa_et,$platform);
+	$gia_overall_charge = number_format( (float)$gia_overall_charge, 2, '.', '' );
+	$isa_overall_charge = number_format( (float)$isa_overall_charge, 2, '.', '' );
 
 
+	$gia_charges_fund = getPercentageValue( $gia_fund, $gia_overall_charge );
+	$gia_charges_et   = getPercentageValue( $gia_et, $gia_overall_charge );
+	$isa_charges_fund = getPercentageValue( $isa_fund, $isa_overall_charge );
+	$isa_charges_et   = getPercentageValue( $isa_et, $isa_overall_charge );
 
-	$gia_overall_charge = number_format((float)$gia_overall_charge, 4, '.', '');
-	$isa_overall_charge = number_format((float)$isa_overall_charge, 4, '.', '');
+	$total_charges = $gia_charges_fund + $gia_charges_et + $isa_charges_fund + $isa_charges_et;
+	$total_charges = number_format( (float)$total_charges, 2, '.', '' );
 
+	$result = array(
+					"gia_fund_charge" => $gia_charges_fund,
+					"gia_charges_et" => $gia_charges_et,
+					"isa_charges_fund" => $isa_charges_fund,
+					"isa_charges_et" => $isa_charges_et,
+					"total_charges" => $total_charges,
+					"total_investment" => $total_investment
+				);
 
-	$gia_charges_fund = getPercentageValue($gia_fund,$gia_overall_charge);
-	$gia_charges_et   = getPercentageValue($gia_et,$gia_overall_charge);
-
-	$isa_charges_fund = getPercentageValue($isa_fund,$isa_overall_charge);
-	$isa_charges_et   = getPercentageValue($isa_et,$isa_overall_charge);
-
-	$total_charges = $gia_charges_fund+$gia_charges_et+$isa_charges_fund+$isa_charges_et;
-	$total_charges = number_format((float)$total_charges, 2, '.', '');
-
-	$result = array(	"gia_fund_charge" => $gia_charges_fund,
-			"gia_charges_et" => $gia_charges_et,
-			"isa_charges_fund" => $isa_charges_fund,
-			"isa_charges_et" => $isa_charges_et,
-			"total_charges" => $total_charges,
-			"total_investment" => $total_investment
-		);
-	//print '<pre>';print_r($result);
 	return  $result;
 
 }
@@ -275,66 +261,43 @@ function tiering_method_third( $gia_fund, $gia_et, $isa_fund, $isa_et, $total_in
  */
 function tiering_method_four( $gia_fund, $gia_et, $isa_fund, $isa_et, $total_investment, $platform ) {
 
-	$rate_charges=0.00; // percentage rate of charges
+	$rate_charges = 0.00; /* percentage rate of charges */
 
 	$gia_charges_fund = 0;
-	$gia_charges_et = 0;
-
+	$gia_charges_et   = 0;
 	$isa_charges_fund = 0;
-	$isa_charges_et = 0;
+	$isa_charges_et   = 0;
 
+	$overall_investment_fund = $gia_fund + $isa_fund;
+	$overall_investment_et = $gia_et + $isa_et;
 
-	$overall_investment_fund = $gia_fund+$isa_fund;
-	$overall_investment_et = $gia_et+$isa_et;
-	//echo $overall_investment_fund."==".$overall_investment_et;exit;
-	$gia_charges_fund =  getGIAFundChargesFromTier($overall_investment_fund,$platform);
-	//echo $gia_charges_fund;exit;
-	$gia_fund_charge=($overall_investment_fund != 0)?($gia_charges_fund/$overall_investment_fund)*100:0.00;
+	$gia_charges_fund =  getGIAFundChargesFromTier( $overall_investment_fund, $platform );
+	$gia_fund_charge  = ($overall_investment_fund != 0) ? ($gia_charges_fund/$overall_investment_fund)*100 : 0.00;
+	$gia_charges_et   = getGIAETChargesFromTier( $overall_investment_et, $platform );
+	$gia_et_charge    = ($overall_investment_et != 0) ? ($gia_charges_et/$overall_investment_et)*100 : 0.00;
 
-	//echo $gia_fund_charge;exit;
-
-	$gia_charges_et =  getGIAETChargesFromTier($overall_investment_et,$platform);
-
-	$gia_et_charge=($overall_investment_et != 0)?($gia_charges_et/$overall_investment_et)*100:0.00;
-
-	//echo $gia_fund_charge."====".$gia_et_charge;exit;
-
-
-	$isa_charges_fund =  getISAFundChargesFromTier($overall_investment_fund,$platform);
-	//echo $gia_charges_fund;exit;
-	$isa_fund_charge=($overall_investment_fund != 0)?($isa_charges_fund/$overall_investment_fund)*100:0.00;
-
-	//echo $gia_fund_charge;exit;
-
-	$isa_charges_et =  getISAETChargesFromTier($overall_investment_et,$platform);
-
-	$isa_et_charge=($overall_investment_et != 0)?($isa_charges_et/$overall_investment_et)*100:0.00;
-
-	//echo $isa_fund_charge."====".$isa_et_charge;exit;
-
-
-
-	//$gia_overall_charge = number_format((float)$gia_overall_charge, 4, '.', '');
-	//$isa_overall_charge = number_format((float)$isa_overall_charge, 4, '.', '');
-
+	$isa_charges_fund = getISAFundChargesFromTier( $overall_investment_fund, $platform );
+	$isa_fund_charge  = ($overall_investment_fund != 0) ? ($isa_charges_fund/$overall_investment_fund)*100 : 0.00;
+	$isa_charges_et   = getISAETChargesFromTier( $overall_investment_et, $platform );
+	$isa_et_charge    = ($overall_investment_et != 0) ? ($isa_charges_et/$overall_investment_et)*100 : 0.00;
 
 	$gia_charges_fund = getPercentageValue($gia_fund,$gia_fund_charge);
 	$gia_charges_et   = getPercentageValue($gia_et,$gia_et_charge);
-
 	$isa_charges_fund = getPercentageValue($isa_fund,$isa_fund_charge);
 	$isa_charges_et   = getPercentageValue($isa_et,$isa_et_charge);
 
-	$total_charges = $gia_charges_fund+$gia_charges_et+$isa_charges_fund+$isa_charges_et;
-	$total_charges = number_format((float)$total_charges, 2, '.', '');
+	$total_charges = $gia_charges_fund + $gia_charges_et + $isa_charges_fund + $isa_charges_et;
+	$total_charges = number_format( (float)$total_charges, 2, '.', '' );
 
-	$result = array(	"gia_fund_charge" => $gia_charges_fund,
-			"gia_charges_et" => $gia_charges_et,
-			"isa_charges_fund" => $isa_charges_fund,
-			"isa_charges_et" => $isa_charges_et,
-			"total_charges" => $total_charges,
-			"total_investment" => $total_investment
-		);
-	//print '<pre>';print_r($result);
+	$result = array(
+					"gia_fund_charge" => $gia_charges_fund,
+					"gia_charges_et" => $gia_charges_et,
+					"isa_charges_fund" => $isa_charges_fund,
+					"isa_charges_et" => $isa_charges_et,
+					"total_charges" => $total_charges,
+					"total_investment" => $total_investment
+				);
+
 	return  $result;
 
 }
@@ -348,43 +311,35 @@ function tiering_method_four( $gia_fund, $gia_et, $isa_fund, $isa_et, $total_inv
  */
 function tiering_method_fifth( $gia_fund, $gia_et, $isa_fund, $isa_et, $total_investment, $platform ) {
 
-	$rate_charges=0.00; // percentage rate of charges
+	$rate_charges = 0.00; /* percentage rate of charges */
 
 	$gia_charges_fund = 0;
-	$gia_charges_et = 0;
-
+	$gia_charges_et   = 0;
 	$isa_charges_fund = 0;
-	$isa_charges_et = 0;
+	$isa_charges_et   = 0;
 
-
-	//$overall_investment_fund = $gia_fund+$isa_fund;
-	//$overall_investment_et = $gia_et+$isa_et;
-	//echo $overall_investment_fund."==".$overall_investment_et;exit;
 	$gia_charges_fund =  getGIAFundChargesFromTier($total_investment,$platform);
-	$combined_custody_charge=($total_investment != 0)?($gia_charges_fund/$total_investment)*100:0.00;//combined custody charge
-
-	//echo $gia_fund_charge;exit;
-
+	$combined_custody_charge = ($total_investment != 0) ? ($gia_charges_fund/$total_investment)*100 : 0.00; /* combined custody charge */
 
 	$gia_charges_fund = getPercentageValue($gia_fund,$combined_custody_charge);
 	$gia_charges_et   = getPercentageValue($gia_et,$combined_custody_charge);
-
 	$isa_charges_fund = getPercentageValue($isa_fund,$combined_custody_charge);
 	$isa_charges_et   = getPercentageValue($isa_et,$combined_custody_charge);
 
 	$total_charges = $gia_charges_fund+$gia_charges_et+$isa_charges_fund+$isa_charges_et;
-	$total_charges = number_format((float)$total_charges, 2, '.', '');
+	$total_charges = number_format( (float)$total_charges, 2, '.', '' );
 
-	//echo $total_charges;exit;
-	$result = array(	"gia_fund_charge" => $gia_charges_fund,
-			"gia_charges_et" => $gia_charges_et,
-			"isa_charges_fund" => $isa_charges_fund,
-			"isa_charges_et" => $isa_charges_et,
-			"total_charges" => $total_charges,
-			"total_investment" => $total_investment
-		);
-	//print '<pre>';print_r($result);
+	$result = array(
+					"gia_fund_charge" => $gia_charges_fund,
+					"gia_charges_et" => $gia_charges_et,
+					"isa_charges_fund" => $isa_charges_fund,
+					"isa_charges_et" => $isa_charges_et,
+					"total_charges" => $total_charges,
+					"total_investment" => $total_investment
+				);
+
 	return $result;
+
 }
 
 
@@ -394,34 +349,38 @@ function tiering_method_fifth( $gia_fund, $gia_et, $isa_fund, $isa_et, $total_in
  *
  */
 function getGIAFundChargesFromTier( $fund_amount, $platform ) {
-	$total_tier = count($platform['fund']);
+
+	$total_tier = count( $platform['fund'] );
 	$temp_amount = $fund_amount;
 	$index_of_tier = 0;
 	$charge = 0.00;
-	foreach ($platform['fund'] as $key => $value) {
-		if( ($value['bandsfrom'] <= $fund_amount) && ($value['bandsto'] >= $fund_amount) ){
+
+	foreach ( $platform['fund'] as $key => $value ) {
+
+		if ( ($value['bandsfrom'] <= $fund_amount) && ($value['bandsto'] >= $fund_amount) ) {
 			$charge += getPercentageValue($temp_amount,$value['gia']);
 			break;
-		}else{
+		} else {
+
 			$index_of_tier++;
-			if($index_of_tier == $total_tier ){
+			if ( $index_of_tier == $total_tier ) {
 				$charge += getPercentageValue($temp_amount,$value['gia']);
 				break;
 			}
-			/*$charge += getPercentageValue($value['bandsto'],$value['gia']);
-			$temp_amount -= $value['bandsto'];*/
 			if ( $temp_amount >= $value['bandsto'] ) {
 				$charge += getPercentageValue( $value['bandsto'], $value['gia'] );
 				$temp_amount -= $value['bandsto'];
 			} else {
-				//echo $charge." general</br>";
 				$charge += getPercentageValue( $temp_amount, $value['gia'] );
 				break;
 			}
+
 		}
+
 	}
 
 	return  $charge;
+
 }
 
 /**
@@ -429,34 +388,38 @@ function getGIAFundChargesFromTier( $fund_amount, $platform ) {
  *
  */
 function getGIAETChargesFromTier( $et_amount, $platform ) {
-	$total_tier = count($platform['et']);
+
+	$total_tier = count( $platform['et'] );
 	$temp_amount = $et_amount;
 	$index_of_tier = 0;
 	$charge = 0.00;
-	foreach ($platform['et'] as $key => $value) {
-		if( ($value['bandsfrom'] <= $et_amount) && ($value['bandsto'] >= $et_amount) ){
+
+	foreach ( $platform['et'] as $key => $value ) {
+
+		if ( ($value['bandsfrom'] <= $et_amount) && ($value['bandsto'] >= $et_amount) ){
 			$charge += getPercentageValue($temp_amount,$value['gia']);
 			break;
-		}else{
+		} else {
+
 			$index_of_tier++;
-			if($index_of_tier == $total_tier ){
+			if ( $index_of_tier == $total_tier ) {
 				$charge += getPercentageValue($temp_amount,$value['gia']);
 				break;
 			}
-			/*$charge += getPercentageValue($value['bandsto'],$value['gia']);
-			$temp_amount -= $value['bandsto'];*/
 			if ( $temp_amount >= $value['bandsto'] ) {
 				$charge += getPercentageValue( $value['bandsto'], $value['gia'] );
 				$temp_amount -= $value['bandsto'];
 			} else {
-				//echo $charge." general</br>";
 				$charge += getPercentageValue( $temp_amount, $value['gia'] );
 				break;
 			}
+
 		}
+
 	}
-	//echo $charge;exit;
+
 	return  $charge;
+
 }
 
 /**
@@ -464,34 +427,38 @@ function getGIAETChargesFromTier( $et_amount, $platform ) {
  *
  */
 function getISAFundChargesFromTier( $fund_amount, $platform ) {
-	$total_tier = count($platform['fund']);
+
+	$total_tier = count( $platform['fund'] );
 	$temp_amount = $fund_amount;
 	$index_of_tier = 0;
 	$charge = 0.00;
-	foreach ($platform['fund'] as $key => $value) {
-		if( ($value['bandsfrom'] <= $fund_amount) && ($value['bandsto'] >= $fund_amount) ){
+
+	foreach ( $platform['fund'] as $key => $value ) {
+
+		if ( ($value['bandsfrom'] <= $fund_amount) && ($value['bandsto'] >= $fund_amount) ) {
 			$charge += getPercentageValue($temp_amount,$value['isa']);
 			break;
-		}else{
+		} else {
+
 			$index_of_tier++;
-			if($index_of_tier == $total_tier ){
+			if ( $index_of_tier == $total_tier ) {
 				$charge += getPercentageValue($temp_amount,$value['isa']);
 				break;
 			}
-			/*$charge += getPercentageValue($value['bandsto'],$value['isa']);
-			$temp_amount -= $value['bandsto'];*/
 			if ( $temp_amount >= $value['bandsto'] ) {
 				$charge += getPercentageValue( $value['bandsto'], $value['isa'] );
 				$temp_amount -= $value['bandsto'];
 			} else {
-				//echo $charge." general</br>";
 				$charge += getPercentageValue( $temp_amount, $value['isa'] );
 				break;
 			}
+
 		}
+
 	}
-	//echo $charge."==";
+
 	return  $charge;
+
 }
 
 /**
@@ -499,34 +466,38 @@ function getISAFundChargesFromTier( $fund_amount, $platform ) {
  *
  */
 function getISAETChargesFromTier( $et_amount, $platform ) {
-	$total_tier = count($platform['et']);
+
+	$total_tier = count( $platform['et'] );
 	$temp_amount = $et_amount;
 	$index_of_tier = 0;
 	$charge = 0.00;
-	foreach ($platform['et'] as $key => $value) {
-		if( ($value['bandsfrom'] <= $et_amount) && ($value['bandsto'] >= $et_amount) ){
+
+	foreach ( $platform['et'] as $key => $value ) {
+
+		if ( ( $value['bandsfrom'] <= $et_amount ) && ( $value['bandsto'] >= $et_amount ) ) {
 			$charge += getPercentageValue($temp_amount,$value['isa']);
 			break;
-		}else{
+		} else {
+
 			$index_of_tier++;
-			if($index_of_tier == $total_tier ){
+			if ( $index_of_tier == $total_tier ) {
 				$charge += getPercentageValue($temp_amount,$value['isa']);
 				break;
 			}
-			/*$charge += getPercentageValue($value['bandsto'],$value['isa']);
-			$temp_amount -= $value['bandsto'];*/
 			if ( $temp_amount >= $value['bandsto'] ) {
 				$charge += getPercentageValue( $value['bandsto'], $value['isa'] );
 				$temp_amount -= $value['bandsto'];
 			} else {
-				//echo $charge." general</br>";
 				$charge += getPercentageValue( $temp_amount, $value['isa'] );
 				break;
 			}
+
 		}
+
 	}
-	//echo $charge."==";
+
 	return  $charge;
+
 }
 
 /**
@@ -535,8 +506,7 @@ function getISAETChargesFromTier( $et_amount, $platform ) {
  */
 function getPercentageValue( $value, $percentage ) {
 	$percentage_value = ($percentage / 100) * $value;
-	return number_format((float)$percentage_value, 4, '.', '');
-	//return $percentage_value;
+	return number_format( (float)$percentage_value, 2, '.', '' );
 }
 
 ?>
