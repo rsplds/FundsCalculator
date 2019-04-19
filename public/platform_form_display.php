@@ -139,6 +139,8 @@ function tiering_method_first( $gia_fund, $gia_et, $isa_fund, $isa_et, $total_in
 		if( ($value['bandsfrom'] <= $total_investment) && ($value['bandsto'] >= $total_investment) ){
 			$rate_charges=$value['gia'];
 			break;
+		}else{
+			$rate_charges=$value['gia'];
 		}
 	}
 
