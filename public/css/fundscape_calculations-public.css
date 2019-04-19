@@ -26,3 +26,47 @@
 	display: none;
 	padding: 10px 0;
 }
+
+/* Result Styling  */
+.funds-results {
+    padding: 20px 0;
+}
+.funds-results .result-inner {
+    padding: 0 10px 10px;
+    margin: 0 0 15px;
+    font-size: 16px;
+    line-height: 22px;
+}
+.funds-results .result-total {
+    font-size: 20px;
+    line-height: 26px;
+}
+.funds-results .result-title {
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: bold;
+}
+.funds-results .result-inner span {
+    font-weight: bold;
+}
+.funds-results .result-total {
+    border-bottom: 1px solid #ccc;
+}
+.funds-results .result-outer {
+    border-bottom: 1px solid #ccc;
+    margin: 0 0 15px;
+}
+.funds-results .result-left {
+    float: left;
+    width: 50%;
+}
+.funds-results .result-right {
+    float: right;
+    width: 50%;
+}
+.clearfix:before,
+.clearfix:after {
+    content: '';
+    clear: both;
+    display: table;
+}

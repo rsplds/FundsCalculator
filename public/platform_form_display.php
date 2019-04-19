@@ -139,6 +139,8 @@ function tiering_method_first( $gia_fund, $gia_et, $isa_fund, $isa_et, $total_in
 		if( ($value['bandsfrom'] <= $total_investment) && ($value['bandsto'] >= $total_investment) ){
 			$rate_charges=$value['gia'];
 			break;
+		}else{
+			$rate_charges=$value['gia'];
 		}
 	}
 
@@ -149,24 +151,18 @@ function tiering_method_first( $gia_fund, $gia_et, $isa_fund, $isa_et, $total_in
 	$isa_charges_et   = 0;
 
 	$gia_charges_fund = getPercentageValue( $gia_fund, $rate_charges );
-	$gia_charges_fund = number_format( (float)$gia_charges_fund, 2, '.', '' );
 	$gia_charges_et   = getPercentageValue( $gia_et, $rate_charges );
-	$gia_charges_et   = number_format( (float)$gia_charges_et, 2, '.', '' );
-
 	$isa_charges_fund = getPercentageValue( $isa_fund, $rate_charges );
-	$isa_charges_fund = number_format( (float)$isa_charges_fund, 2, '.', '' );
 	$isa_charges_et   = getPercentageValue( $isa_et, $rate_charges );
-	$isa_charges_et   = number_format( (float)$isa_charges_et, 2, '.', '' );
 
 	$total_charges = $gia_charges_fund + $gia_charges_et + $isa_charges_fund + $isa_charges_et;
-	$total_charges = number_format( (float)$total_charges, 2, '.', '' );
 
 	$result = array(
-					"gia_fund_charge" => $gia_charges_fund,
-					"gia_charges_et" => $gia_charges_et,
-					"isa_charges_fund" => $isa_charges_fund,
-					"isa_charges_et" => $isa_charges_et,
-					"total_charges" => $total_charges,
+					"gia_fund_charge" => number_format( (float)$gia_charges_fund, 4, '.', '' ),
+					"gia_charges_et" => number_format( (float)$gia_charges_et, 4, '.', '' ),
+					"isa_charges_fund" => number_format( (float)$isa_charges_fund, 4, '.', '' ),
+					"isa_charges_et" => number_format( (float)$isa_charges_et, 4, '.', '' ),
+					"total_charges" => number_format( (float)$total_charges, 4, '.', '' ),
 					"total_investment" => $total_investment
 				);
 
@@ -194,14 +190,13 @@ function tiering_method_secound( $gia_fund, $gia_et, $isa_fund, $isa_et, $total_
 	$isa_charges_et   =  getISAETChargesFromTier( $isa_et, $platform );
 
 	$total_charges = $gia_charges_fund + $gia_charges_et + $isa_charges_fund + $isa_charges_et;
-	$total_charges = number_format( (float)$total_charges, 2, '.', '' );
 
 	$result = array(
-					"gia_fund_charge" => $gia_charges_fund,
-					"gia_charges_et" => $gia_charges_et,
-					"isa_charges_fund" => $isa_charges_fund,
-					"isa_charges_et" => $isa_charges_et,
-					"total_charges" => $total_charges,
+					"gia_fund_charge" => number_format( (float)$gia_charges_fund, 4, '.', '' ),
+					"gia_charges_et" => number_format( (float)$gia_charges_et, 4, '.', '' ),
+					"isa_charges_fund" => number_format( (float)$isa_charges_fund, 4, '.', '' ),
+					"isa_charges_et" => number_format( (float)$isa_charges_et, 4, '.', '' ),
+					"total_charges" => number_format( (float)$total_charges, 4, '.', '' ),
 					"total_investment" => $total_investment
 				);
 
@@ -230,24 +225,19 @@ function tiering_method_third( $gia_fund, $gia_et, $isa_fund, $isa_et, $total_in
 	$isa_charges_fund = getISAFundChargesFromTier( $isa_overall_investment, $platform );
 	$isa_overall_charge = ($isa_overall_investment != 0) ? ($isa_charges_fund/$isa_overall_investment)*100 : 0.00;
 
-	$gia_overall_charge = number_format( (float)$gia_overall_charge, 2, '.', '' );
-	$isa_overall_charge = number_format( (float)$isa_overall_charge, 2, '.', '' );
-
-
 	$gia_charges_fund = getPercentageValue( $gia_fund, $gia_overall_charge );
 	$gia_charges_et   = getPercentageValue( $gia_et, $gia_overall_charge );
 	$isa_charges_fund = getPercentageValue( $isa_fund, $isa_overall_charge );
 	$isa_charges_et   = getPercentageValue( $isa_et, $isa_overall_charge );
 
 	$total_charges = $gia_charges_fund + $gia_charges_et + $isa_charges_fund + $isa_charges_et;
-	$total_charges = number_format( (float)$total_charges, 2, '.', '' );
 
 	$result = array(
-					"gia_fund_charge" => $gia_charges_fund,
-					"gia_charges_et" => $gia_charges_et,
-					"isa_charges_fund" => $isa_charges_fund,
-					"isa_charges_et" => $isa_charges_et,
-					"total_charges" => $total_charges,
+					"gia_fund_charge" => number_format( (float)$gia_charges_fund, 4, '.', '' ),
+					"gia_charges_et" => number_format( (float)$gia_charges_et, 4, '.', '' ),
+					"isa_charges_fund" => number_format( (float)$isa_charges_fund, 4, '.', '' ),
+					"isa_charges_et" => number_format( (float)$isa_charges_et, 4, '.', '' ),
+					"total_charges" => number_format( (float)$total_charges, 4, '.', '' ),
 					"total_investment" => $total_investment
 				);
 
@@ -287,14 +277,13 @@ function tiering_method_four( $gia_fund, $gia_et, $isa_fund, $isa_et, $total_inv
 	$isa_charges_et   = getPercentageValue($isa_et,$isa_et_charge);
 
 	$total_charges = $gia_charges_fund + $gia_charges_et + $isa_charges_fund + $isa_charges_et;
-	$total_charges = number_format( (float)$total_charges, 2, '.', '' );
 
 	$result = array(
-					"gia_fund_charge" => $gia_charges_fund,
-					"gia_charges_et" => $gia_charges_et,
-					"isa_charges_fund" => $isa_charges_fund,
-					"isa_charges_et" => $isa_charges_et,
-					"total_charges" => $total_charges,
+					"gia_fund_charge" => number_format( (float)$gia_charges_fund, 4, '.', '' ),
+					"gia_charges_et" => number_format( (float)$gia_charges_et, 4, '.', '' ),
+					"isa_charges_fund" => number_format( (float)$isa_charges_fund, 4, '.', '' ),
+					"isa_charges_et" => number_format( (float)$isa_charges_et, 4, '.', '' ),
+					"total_charges" => number_format( (float)$total_charges, 4, '.', '' ),
 					"total_investment" => $total_investment
 				);
 
@@ -327,14 +316,13 @@ function tiering_method_fifth( $gia_fund, $gia_et, $isa_fund, $isa_et, $total_in
 	$isa_charges_et   = getPercentageValue($isa_et,$combined_custody_charge);
 
 	$total_charges = $gia_charges_fund+$gia_charges_et+$isa_charges_fund+$isa_charges_et;
-	$total_charges = number_format( (float)$total_charges, 2, '.', '' );
 
 	$result = array(
-					"gia_fund_charge" => $gia_charges_fund,
-					"gia_charges_et" => $gia_charges_et,
-					"isa_charges_fund" => $isa_charges_fund,
-					"isa_charges_et" => $isa_charges_et,
-					"total_charges" => $total_charges,
+					"gia_fund_charge" => number_format( (float)$gia_charges_fund, 4, '.', '' ),
+					"gia_charges_et" => number_format( (float)$gia_charges_et, 4, '.', '' ),
+					"isa_charges_fund" => number_format( (float)$isa_charges_fund, 4, '.', '' ),
+					"isa_charges_et" => number_format( (float)$isa_charges_et, 4, '.', '' ),
+					"total_charges" => number_format( (float)$total_charges, 4, '.', '' ),
 					"total_investment" => $total_investment
 				);
 
@@ -506,7 +494,7 @@ function getISAETChargesFromTier( $et_amount, $platform ) {
  */
 function getPercentageValue( $value, $percentage ) {
 	$percentage_value = ($percentage / 100) * $value;
-	return number_format( (float)$percentage_value, 2, '.', '' );
+	return $percentage_value;
 }
 
 ?>

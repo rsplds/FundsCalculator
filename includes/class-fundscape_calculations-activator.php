@@ -69,7 +69,12 @@ class Fundscape_calculations_Activator {
 			'post_author'   => 1,
 			'post_type' => 'page'
 		);
-		wp_insert_post( $fundscape_page );
+
+	 	$platform_exist_page = stripslashes( get_option( 'platform_page' ) );
+	 	if ( empty( $platform_exist_page ) || $platform_exist_page == '' ) {
+			$platform_page = wp_insert_post( $fundscape_page );
+			update_option( 'platform_page', $platform_page );
+		}
 
 	}
 
