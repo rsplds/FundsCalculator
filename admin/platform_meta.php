@@ -80,7 +80,7 @@ function platform_meta_fields() {
 										$is_edit = true;
 						?>
 							<div class="platform-fields-container">
-								<div class="platform-fields-section"> Tier <?php echo $funds_count; ?> </div>
+								<div class="platform-fields-section tierlabel"> Tier <?php echo $funds_count; ?> </div>
 								<div class="platform-fields-section">
 									<label>Bands From</label>
 									<input type="number" name="funds[<?php echo $funds_count; ?>][bandsfrom]" min="0" value="<?php echo $value['bandsfrom']; ?>" />
@@ -97,7 +97,7 @@ function platform_meta_fields() {
 									<label>ISA</label>
 									<input type="number" name="funds[<?php echo $funds_count; ?>][isa]" min="0" step="any" value="<?php echo $value['isa']; ?>" />
 								</div>
-								<div class="platform-fields-section">
+								<div class="platform-fields-section platfrom-remove-btn">
 									<a href="javascript:" class="remove-funds button-primary dashicons-before dashicons-minus" data-count="<?php echo $funds_count; ?>"></a>
 								</div>
 							</div>
@@ -109,7 +109,7 @@ function platform_meta_fields() {
 							else :
 						?>
 							<div class="platform-fields-container">
-								<div class="platform-fields-section">Tier <?php echo $funds_count; ?></div>
+								<div class="platform-fields-section tierlabel">Tier <?php echo $funds_count; ?></div>
 								<div class="platform-fields-section">
 									<label>Bands From</label>
 									<input type="number" name="funds[<?php echo $funds_count; ?>][bandsfrom]" min="0" />
@@ -126,8 +126,8 @@ function platform_meta_fields() {
 									<label>ISA</label>
 									<input type="number" name="funds[<?php echo $funds_count; ?>][isa]" min="0" step="any" />
 								</div>
-								<div class="platform-fields-section">
-									<a href="javascript:" class="remove-funds button-primary dashicons-before dashicons-minus" data-count="<?php echo $funds_count; ?>"></a>
+								<div class="platform-fields-section platfrom-remove-btn">
+									<a href="javascript:" class="remove-funds button-primary dashicons-before dashicons-minus " data-count="<?php echo $funds_count; ?>"></a>
 								</div>
 							</div>
 						<?php endif; ?>
@@ -167,7 +167,7 @@ function platform_meta_fields() {
 									foreach ( $platform_exchange_trades as $key => $value ) {
 						?>
 							<div class="platform-fields-container">
-								<div class="platform-fields-section">Tier <?php echo $et_count; ?></div>
+								<div class="platform-fields-section tierlabel">Tier <?php echo $et_count; ?></div>
 								<div class="platform-fields-section">
 									<label>Bands From</label>
 									<input type="number" name="exchange_trades[<?php echo $et_count; ?>][bandsfrom]" min="0" value="<?php echo $value['bandsfrom']; ?>" />
@@ -184,7 +184,7 @@ function platform_meta_fields() {
 									<label>ISA</label>
 									<input type="number" name="exchange_trades[<?php echo $et_count; ?>][isa]" min="0" step="any" value="<?php echo $value['isa']; ?>" />
 								</div>
-								<div class="platform-fields-section">
+								<div class="platform-fields-section platfrom-remove-btn">
 									<a href="javascript:" class="remove-exchange-trades button-primary dashicons-before dashicons-minus" data-count="<?php echo $et_count; ?>"></a>
 								</div>
 							</div>
@@ -195,7 +195,7 @@ function platform_meta_fields() {
 							else :
 						?>
 							<div class="platform-fields-container">
-								<div class="platform-fields-section">Tier <?php echo $et_count; ?></div>
+								<div class="platform-fields-section tierlabel">Tier <?php echo $et_count; ?></div>
 								<div class="platform-fields-section">
 									<label>Bands From</label>
 									<input type="number" name="exchange_trades[<?php echo $et_count; ?>][bandsfrom]" min="0" />
@@ -212,7 +212,7 @@ function platform_meta_fields() {
 									<label>ISA</label>
 									<input type="number" name="exchange_trades[<?php echo $et_count; ?>][isa]" min="0" step="any" />
 								</div>
-								<div class="platform-fields-section">
+								<div class="platform-fields-section platfrom-remove-btn">
 									<a href="javascript:" class="remove-exchange-trades button-primary dashicons-before dashicons-minus" data-count="<?php echo $et_count; ?>"></a>
 								</div>
 							</div>
