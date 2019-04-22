@@ -72,12 +72,15 @@ function platform_meta_fields() {
 				<div class="platform-section">
 					<div class="platform-outer" id="funds-section">
 						<?php
+							$is_edit = false;
 							if ( !empty( $platform_data ) ) :
 								$platform_funds = json_decode( $platform_data[0]->platform_funds, true );
 								if ( !empty( $platform_funds ) ) :
 									foreach ( $platform_funds as $key => $value ) {
+										$is_edit = true;
 						?>
 							<div class="platform-fields-container">
+								<div class="platform-fields-section tierlabel"> Tier <?php echo $funds_count; ?> </div>
 								<div class="platform-fields-section">
 									<label>Bands From</label>
 									<input type="number" name="funds[<?php echo $funds_count; ?>][bandsfrom]" min="0" value="<?php echo $value['bandsfrom']; ?>" />
@@ -94,17 +97,19 @@ function platform_meta_fields() {
 									<label>ISA</label>
 									<input type="number" name="funds[<?php echo $funds_count; ?>][isa]" min="0" step="any" value="<?php echo $value['isa']; ?>" />
 								</div>
-								<div class="platform-fields-section">
+								<div class="platform-fields-section platfrom-remove-btn">
 									<a href="javascript:" class="remove-funds button-primary dashicons-before dashicons-minus" data-count="<?php echo $funds_count; ?>"></a>
 								</div>
 							</div>
 						<?php
 									$funds_count++;
 									}
+
 								endif;
 							else :
 						?>
 							<div class="platform-fields-container">
+								<div class="platform-fields-section tierlabel">Tier <?php echo $funds_count; ?></div>
 								<div class="platform-fields-section">
 									<label>Bands From</label>
 									<input type="number" name="funds[<?php echo $funds_count; ?>][bandsfrom]" min="0" />
@@ -121,14 +126,25 @@ function platform_meta_fields() {
 									<label>ISA</label>
 									<input type="number" name="funds[<?php echo $funds_count; ?>][isa]" min="0" step="any" />
 								</div>
-								<div class="platform-fields-section">
-									<a href="javascript:" class="remove-funds button-primary dashicons-before dashicons-minus" data-count="<?php echo $funds_count; ?>"></a>
+								<div class="platform-fields-section platfrom-remove-btn">
+									<a href="javascript:" class="remove-funds button-primary dashicons-before dashicons-minus " data-count="<?php echo $funds_count; ?>"></a>
 								</div>
 							</div>
 						<?php endif; ?>
 					</div>
 					<div class="add-md-area clearfix">
-						<input type="hidden" id="funds_count" value="<?php echo $funds_count+1; ?>" />
+						<?php 
+							if( $is_edit == true ){
+								?>
+								<input type="hidden" id="funds_count" value="<?php echo $funds_count; ?>" />
+								<?php 
+							}else{
+								?>
+								<input type="hidden" id="funds_count" value="<?php echo $funds_count+1; ?>" />
+								<?php
+							} 
+						?>
+						<!-- <input type="hidden" id="funds_count" value="<?php echo $funds_count+1; ?>" /> -->
 						<a href="javascript:" class="add-funds button-primary dashicons-before dashicons-plus"> Add</a>
 					</div>
 				</div>
@@ -151,6 +167,7 @@ function platform_meta_fields() {
 									foreach ( $platform_exchange_trades as $key => $value ) {
 						?>
 							<div class="platform-fields-container">
+								<div class="platform-fields-section tierlabel">Tier <?php echo $et_count; ?></div>
 								<div class="platform-fields-section">
 									<label>Bands From</label>
 									<input type="number" name="exchange_trades[<?php echo $et_count; ?>][bandsfrom]" min="0" value="<?php echo $value['bandsfrom']; ?>" />
@@ -167,7 +184,7 @@ function platform_meta_fields() {
 									<label>ISA</label>
 									<input type="number" name="exchange_trades[<?php echo $et_count; ?>][isa]" min="0" step="any" value="<?php echo $value['isa']; ?>" />
 								</div>
-								<div class="platform-fields-section">
+								<div class="platform-fields-section platfrom-remove-btn">
 									<a href="javascript:" class="remove-exchange-trades button-primary dashicons-before dashicons-minus" data-count="<?php echo $et_count; ?>"></a>
 								</div>
 							</div>
@@ -178,6 +195,7 @@ function platform_meta_fields() {
 							else :
 						?>
 							<div class="platform-fields-container">
+								<div class="platform-fields-section tierlabel">Tier <?php echo $et_count; ?></div>
 								<div class="platform-fields-section">
 									<label>Bands From</label>
 									<input type="number" name="exchange_trades[<?php echo $et_count; ?>][bandsfrom]" min="0" />
@@ -194,14 +212,25 @@ function platform_meta_fields() {
 									<label>ISA</label>
 									<input type="number" name="exchange_trades[<?php echo $et_count; ?>][isa]" min="0" step="any" />
 								</div>
-								<div class="platform-fields-section">
+								<div class="platform-fields-section platfrom-remove-btn">
 									<a href="javascript:" class="remove-exchange-trades button-primary dashicons-before dashicons-minus" data-count="<?php echo $et_count; ?>"></a>
 								</div>
 							</div>
 						<?php endif; ?>
 					</div>
 					<div class="add-md-area clearfix">
-						<input type="hidden" id="et_count" value="<?php echo $et_count+1; ?>" />
+						<!-- <input type="hidden" id="et_count" value="<?php echo $et_count+1; ?>" /> -->
+						<?php 
+							if( $is_edit == true ){
+								?>
+								<input type="hidden" id="et_count" value="<?php echo $et_count; ?>" />
+								<?php 
+							}else{
+								?>
+								<input type="hidden" id="et_count" value="<?php echo $et_count+1; ?>" />
+								<?php
+							} 
+						?>
 						<a href="javascript:" class="add-exchange-trades button-primary dashicons-before dashicons-plus"> Add</a>
 					</div>
 				</div>
@@ -228,6 +257,7 @@ function platform_info_save( $post_id ) {
 
 	/* Collect Data */
 	$funds = json_encode($_POST[ 'funds' ]);
+	
 	$exchange_trades = json_encode($_POST['exchange_trades']);
 	$method = $_POST[ 'platform_method' ];
 

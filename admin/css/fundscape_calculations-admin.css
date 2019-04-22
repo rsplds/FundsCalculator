@@ -72,3 +72,13 @@
     display: inline-block;
     padding: 0 10px;
 }
+.platform-fields-section.tierlabel{width: 125px!important;
+  
+    display: flex;
+    align-items: center;}
+
+    .platform-fields-section.platfrom-remove-btn {
+    display: flex;
+    padding-left: 10px;
+    align-items: flex-end;
+}
