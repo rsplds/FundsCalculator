@@ -40,6 +40,7 @@
 
 				let funds_div;
 				funds_div = '<div class="platform-fields-container">';
+				funds_div += '<div class="platform-fields-section">Tier'+ funds_count +'</div>';
 				funds_div += '<div class="platform-fields-section"><label>Bands From </label><input type="number" name="funds[' + funds_count + '][bandsfrom]" min="0" /></div>';
 				funds_div += '<div class="platform-fields-section"><label>Bands To </label><input type="number" name="funds[' + funds_count + '][bandsto]" min="0" /></div>';
 				funds_div += '<div class="platform-fields-section"><label>GIA </label><input type="number" name="funds[' + funds_count + '][gia]" min="0" step="any" /></div>';
@@ -61,6 +62,7 @@
 
 				let et_div;
 				et_div = '<div class="platform-fields-container">';
+				et_div += '<div class="platform-fields-section">Tier'+ et_count +'</div>';
 				et_div += '<div class="platform-fields-section"><label>Bands From </label><input type="number" name="exchange_trades[' + et_count + '][bandsfrom]" min="0" /></div>';
 				et_div += '<div class="platform-fields-section"><label>Bands To </label><input type="number" name="exchange_trades[' + et_count + '][bandsto]" min="0" /></div>';
 				et_div += '<div class="platform-fields-section"><label>GIA </label><input type="number" name="exchange_trades[' + et_count + '][gia]" min="0" step="any" /></div>';
