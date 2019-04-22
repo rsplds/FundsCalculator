@@ -78,13 +78,13 @@ function platform_options_function() {
 				<td>
 					<h3>Basic Information</h3>
 					<hr>
-					<p>This plugin is used to calculate GIA & ISA charges based on investments. </p>
+					<p>This plugin is using for calculate GIA and ISA charges based on Funds and Exchange-traded. </p>
 					<p>&nbsp;</p>
 					<h3>How to use?</h3>
 					<hr>
 					<h4>For Admin:</h4>
-					<p>First you have to create platforms with required values.</p>
-					<p>After create all platforms, visit platform settings page and here you can active platform for calculations.</p>
+					<p>First you have to create platforms with required values. Path:- Admin-> Platforms -> Add New Platform.</p>
+					<p>After create all platforms, visit platform settings page and here you can active platform for calculations. Path:- Admin-> Platforms -> Platform Options.</p>
 					<h4>Display form on Front-end:</h4>
 					<p>To display form on Front-end, you can use shortcode <span class="highlight">[fundscape_form]</span> in any of the page or post content editor. or You can use php function <span class="highlight">&lt;?php echo do_shortcode( '[fundscape_form]' ); ?&gt;</span> in the PHP file.</p>
 					<p>OR also you can use plugin created page <a href="<?php echo esc_url( home_url( '/fundscape-calculations' ) ); ?>" target="_blank">Fundscape Calculations</a></p>
