@@ -32,7 +32,7 @@ function platform_meta_fields() {
 						);
 
 ?>
-	<table class="platform-table">
+	<table class="platform-table wp-list-table widefat fixed striped pages">
 		<tr>
 			<td>
 				<div class="platform-section">

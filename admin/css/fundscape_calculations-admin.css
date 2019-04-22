@@ -82,3 +82,13 @@
     padding-left: 10px;
     align-items: flex-end;
 }
+
+.platform-section input[type=number] {
+	width: 100%
+}
+.platform-table .platform-fields-container .platform-fields-section {
+	margin-right: 5px;
+}
+.platform-table .platform-fields-container .platform-fields-section:last-child {
+	margin-right: 0px;
+}
