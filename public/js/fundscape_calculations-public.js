@@ -62,7 +62,7 @@
 						result_data += '<div class="result-inner result-title"> GIA </div>';
 						result_data += '<div class="result-inner"> GIA Fund Charges : <span>£ ' + response.result.gia_fund_charge + '</span></div>';
 						result_data += '<div class="result-inner"> GIA Exchange Trade Charges : <span>£ ' + response.result.gia_charges_et + '</span></div>';
-						result_data += '<div class="result-inner"> Total Gia Charges : <span>£ ' + ( ( parseFloat(response.result.gia_charges_et))+ ( parseFloat(response.result.gia_fund_charge) ) ).toFixed(4) + '</span></div>';
+						result_data += '<div class="result-inner"> Total GIA Charges : <span>£ ' + ( ( parseFloat(response.result.gia_charges_et))+ ( parseFloat(response.result.gia_fund_charge) ) ).toFixed(4) + '</span></div>';
 						result_data += '</div><div class="result-right">';
 						result_data += '<div class="result-inner result-title"> ISA </div>';
 						result_data += '<div class="result-inner"> ISA Fund Charges : <span>£ ' + response.result.isa_charges_fund + '</span></div>';

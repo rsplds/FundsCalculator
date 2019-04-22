@@ -1,7 +1,7 @@
 <?php
 
 /*
- *  Add Meta Box For Platform Funds & Exchange Trades
+ *  Add Meta Box For Platform Funds & Exchange Traded
  *
  */
 function platform_info() {
@@ -152,7 +152,7 @@ function platform_meta_fields() {
 		</tr>
 		<tr>
 			<td>
-				<div class="platform-title">Exchange Trades</div>
+				<div class="platform-title">Exchange Traded</div>
 			</td>
 		</tr>
 		<?php $et_count = 1; ?>
