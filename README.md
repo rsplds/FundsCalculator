@@ -25,7 +25,7 @@ This is Wordpress Calculator plugin for calculate GIA and ISA charges based on F
 <hr>
 <h4>For Admin:</h4>
 <p>First you have to create platforms with required values. Path:- Admin-> Platforms -> Add New Platform.</p>
-<p>After create all platforms, visit platform settings page and here you can active platform for calculations. Path:- Admin-> Platforms -> Platform Options.</p>
+<p>After create all platforms, visit platform settings page and here you can active platform for calculations. Path:- Admin-> Platforms -> Platform Options. <b>Please don't forget to active platform otherwise calculation will be zero.</b></p>
 <h4>Display form on Front-end, you can check the plugin settings page.</h4>
 <p>&nbsp;</p>
 
