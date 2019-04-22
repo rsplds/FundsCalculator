@@ -13,7 +13,7 @@ This is Wordpress Calculator plugin for calculate GIA and ISA charges based on F
 </ul></p>
 
 <p>&nbsp;</p>
-<h3>How to install this plugin.?</h3>
+<h3>How to install this plugin?</h3>
 <p>You can download this plugin from below public repository.</p>
 <p>
   https://github.com/rsplds/FundsCalculator
@@ -21,7 +21,7 @@ This is Wordpress Calculator plugin for calculate GIA and ISA charges based on F
 <p>You need to upload downloaded zip file into plugins section and activate this plugin</p>
 
 <p>&nbsp;</p>
-<h3>How to use this plugin.?</h3>
+<h3>How to use this plugin?</h3>
 <hr>
 <h4>For Admin:</h4>
 <p>First you have to create platforms with required values. Path:- Admin-> Platforms -> Add New Platform.</p>

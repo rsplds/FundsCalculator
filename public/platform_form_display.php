@@ -10,7 +10,7 @@ function fundscape_form_function() {
 		$fundscape_form = '<div class="fundscape-form-section">';
 		$fundscape_form .= '<div>Total Investment : <span id="total_investment" ></span></div>';
 		$fundscape_form .= '<form name="fundscape_form" id="fundscape-form" method="post">';
-		$fundscape_form .= '<h4>Product Split of total investment (Fund) :</h4>';
+		$fundscape_form .= '<h4>Product split of total investment :</h4>';
 		$fundscape_form .= '<div class="fundscape-fields-section"><label>GIA</label><input type="number" name="funds_gia" id="funds_gia" class="fundscape-field" min="0" /></div>';
 		$fundscape_form .= '<div class="fundscape-fields-section"><label>ISA</label><input type="number" name="funds_isa" id="funds_isa" class="fundscape-field" min="0" /></div>';
 		$fundscape_form .= '<h4>Product split of exchange-traded</h4>';

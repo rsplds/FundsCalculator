@@ -87,7 +87,7 @@ function platform_options_function() {
                                         <p>After create all platforms, visit platform settings page and here you can active platform for calculations. Path:- Admin-> Platforms -> Platform Options. <b>Please don't forget to active platform otherwise calculation will be zero.</b></p>
 					<h4>Display form on Front-end:</h4>
 					<p>To display form on Front-end, you can use shortcode <span class="highlight">[fundscape_form]</span> in any of the page or post content editor. or You can use php function <span class="highlight">&lt;?php echo do_shortcode( '[fundscape_form]' ); ?&gt;</span> in the PHP file.</p>
-					<p>OR also you can use plugin created page <a href="<?php echo esc_url( home_url( '/fundscape-calculations' ) ); ?>" target="_blank">Fundscape Calculations</a></p>
+					<p>OR You can use plugin created page <a href="<?php echo esc_url( home_url( '/fundscape-calculations' ) ); ?>" target="_blank">Fundscape Calculations</a></p>
 				</td>
 			</tr>
 		</table>
