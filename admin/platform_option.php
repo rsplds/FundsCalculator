@@ -47,6 +47,7 @@ function platform_options_function() {
 						<?php $active_platform = stripslashes( get_option( 'active_platform' ) ); ?>
 						<div>
 							<select name="active_platform" id="active_platform">
+								<option value="none"<?php if ($active_platform == 'none') { echo 'selected'; } ?>>Select</option>
 								<?php
 									$all_platforms = get_posts( array( 'post_type' => 'platform', 'numberposts' => -1 ) );
 									foreach ( $all_platforms as $key => $value ) {
