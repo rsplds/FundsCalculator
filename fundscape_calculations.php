@@ -162,10 +162,17 @@ add_action( 'admin_notices', 'platform_availibility_notice', 99 );
 function platform_trash_function($post_id) {
 
 	$active_platform = stripslashes( get_option( 'active_platform' ) );
+    $platform_exist_page = stripslashes( get_option( 'platform_page' ) );
     if( !did_action('trash_post') ) {
+
     	if ( $post_id == $active_platform ) {
     		update_option( 'active_platform', 'none' );
     	}
+
+    	if ( $post_id == $platform_exist_page ) {
+    		update_option( 'platform_page', '' );
+    	}
+
     }
 
 }
