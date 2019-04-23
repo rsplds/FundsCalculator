@@ -135,9 +135,20 @@ function platform_availibility_notice() {
 	}
 
 	/* Notice if Platform is not selected as active. */
-	$active_platform = stripslashes( get_option( 'active_platform' ) );
-	if ( empty( $active_platform ) || $active_platform == 'none' ) {
-		echo '<div class="notice notice-warning is-dismissible"><p>Please select a platform as active.</p></div>';
+	if ( isset($_POST['active_platform']) ) {
+		$active_platform_var = $_POST['active_platform'];
+		$active_platform_var = !empty( $active_platform_var ) ? $active_platform_var : 'none';
+
+		if ( $active_platform_var == 'none' || $active_platform_var == '' ) {
+			echo '<div class="notice notice-warning is-dismissible"><p>Please select a platform as active.</p></div>';
+		} else {
+			echo '<div class="notice notice-success is-dismissible"><p>Platform has been selected as active.</p></div>';
+		}
+	} else {
+		$active_platform = stripslashes( get_option( 'active_platform' ) );
+		if ( empty( $active_platform ) || $active_platform == 'none' ) {
+			echo '<div class="notice notice-warning is-dismissible"><p>Please select a platform as active.</p></div>';
+		}
 	}
 
 }
